@@ -1,0 +1,73 @@
+---
+# tasks file for ec2-instance
+
+- name: Create a new Demo EC2 instance
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  vars:
+      region: us-west-2
+      instance_type: t2.micro
+      ami: ami-01e24be29428c15b2
+      keypair: basic-key
+  
+  tasks:
+#    - name: Install pip
+#      pip:
+#         name: boto
+    - name: Create an ec2 instance
+      ec2:
+         key_name: "{{ keypair }}"
+         group: basic_access
+         instance_type: "{{ instance_type}}"
+         image: "{{ ami }}"
+         wait: true
+         region: "{{ region }}"
+         aws_access_key: "AKIAJSMA5MV4C64Q77AQ"
+         aws_secret_key: "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"
+         count: 1 
+         count_tag:
+            Name: Master new
+         instance_tags:
+            Name: Master new
+         vpc_subnet_id: subnet-5785cb1c
+         assign_public_ip: yes
+      register: ec2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

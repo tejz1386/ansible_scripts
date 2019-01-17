@@ -1,0 +1,48 @@
+---
+#to start and stop instances
+- name: Start sandbox instances
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  vars:
+    instance_ids:
+      - 'i-0062a9ea445804efe'
+      - 'i-016874f039660603e'
+      - 'i-0f8c44b4c8c0f04b0'
+    region: us-west-2
+  tasks:
+    - name: Start the sandbox instances
+      ec2:
+        instance_ids: '{{ instance_ids }}'
+        aws_access_key: "AKIAJSMA5MV4C64Q77AQ"
+        aws_secret_key: "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"
+        region: '{{ region }}'
+        state: running
+        wait: True
+        vpc_subnet_id: subnet-5785cb1c
+        assign_public_ip: yes
+#  roles:
+#    - do_neat_stuff
+#    - do_more_neat_stuff
+
+- name: Stop sandbox instances
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  vars:
+    instance_ids:
+      - 'i-0062a9ea445804efe'
+      - 'i-016874f039660603e'
+      - 'i-0f8c44b4c8c0f04b0'
+    region: us-west-2
+  tasks:
+    - name: Stop the sandbox instances
+      ec2:
+        instance_ids: '{{ instance_ids }}'
+        aws_access_key: "AKIAJSMA5MV4C64Q77AQ"
+        aws_secret_key: "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"
+        region: '{{ region }}'
+        state: stopped
+        wait: True
+        vpc_subnet_id: subnet-5785cb1c
+        assign_public_ip: yes
