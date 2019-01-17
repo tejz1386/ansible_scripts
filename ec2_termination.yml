@@ -15,8 +15,8 @@
     - name: stopping ec2 instance
       ec2:
         region:  "{{ region }}"
-        aws_access_key: "AKIAJSMA5MV4C64Q77AQ"
-        aws_secret_key: "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"
+        aws_access_key: ""
+        aws_secret_key: ""
         state: "absent"
         instance_ids: "i-0062a9ea445804efe"
         wait: yes

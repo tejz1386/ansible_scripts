@@ -39,8 +39,8 @@
     - name: Stop the sandbox instances
       ec2:
         instance_ids: '{{ instance_ids }}'
-        aws_access_key: "AKIAJSMA5MV4C64Q77AQ"
-        aws_secret_key: "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"
+        aws_access_key: ""
+        aws_secret_key: ""
         region: '{{ region }}'
         state: stopped
         wait: True
