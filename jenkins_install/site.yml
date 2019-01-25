@@ -1,0 +1,7 @@
+---
+- name: install jenkins
+  hosts: all_ds
+  remote_user: root
+  roles:
+    - role: jenkins_install
+

@@ -1,0 +1,50 @@
+---
+# tasks file for deploy_docker
+#
+- name: Create docker group
+  group:
+    name: "{{docker_group}}"
+    system: yes
+    state: present
+
+- name: Create docker user
+  user:
+    name: "{{docker_user}}"
+    group: "{{docker_group}}"
+
+- name: Ensure sudoers directory exists
+  file:
+    path: "/etc/sudoers.d"
+    state: directory
+
+- name: Set Docker user in sudoers file
+  template:
+    dest: "/etc/sudoers.d/docker"
+    src: sudoers.j2
+
+- name: Install docker and docker components
+  yum:
+    name:
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+    state: latest
+  
+- name: Configuring docker-ce repo
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+    mode: 0644
+
+- name: Installing docker-ce
+  yum:
+    name: "docker-ce"
+    state: present
+
+- name: Start Docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+

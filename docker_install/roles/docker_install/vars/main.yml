@@ -1,0 +1,5 @@
+---
+# vars file for deploy_docker
+#
+docker_user: docker
+docker_group: docker
